@@ -4,7 +4,11 @@ return {
     config = function(_, opts)
         require("toggleterm").setup({
             open_mapping = [[<leader>tt]],
-            direction = float,
+            shade_terminals = true,
+            direction = "float",
+            float_opts = {
+                border = "curved",
+            },
         })
 
     end-- 自动调用 setup()
