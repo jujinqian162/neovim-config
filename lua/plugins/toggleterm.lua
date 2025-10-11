@@ -10,7 +10,7 @@ return {
                 border = "curved",
             },
         })
-        vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm<CR>', {})
+        vim.keymap.set('n', '<leader>tt', '<cmd>ToggleTerm<CR>', {})
         vim.keymap.set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<CR>', {})
         vim.keymap.set('n', '<leader>th', '<cmd>ToggleTerm direction=horizontal<CR>', {})
 

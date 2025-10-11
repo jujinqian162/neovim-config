@@ -8,6 +8,7 @@ local servers = {
             }
         }
     },
+    ["cmake-language-server"] = {},
     pyright = {},
     ["html-lsp"] = {},
     ["css-lsp"] = {},
@@ -38,21 +39,15 @@ return {
     config = function (_, opts)
         require("mason").setup(opts)
 
-        -- setup("lua-language-server", {
-        --     settings = {
-        --         Lua = {
-        --             diagnostics = {
-        --                 globals = { "vim" },
-        --             },
-        --         }
-        --     }
-        -- })
-
         for server, config in pairs(servers) do
             setup(server, config)
         end
 
         vim.cmd("LspStart")
-        vim.diagnostic.config({ update_in_insert = true })
+        vim.diagnostic.config({
+            update_in_insert = true,
+            virtual_text = true,
+            underline = true,
+        })
     end,
 }
