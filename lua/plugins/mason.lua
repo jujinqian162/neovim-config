@@ -1,4 +1,5 @@
 local servers = {
+    ["jdtls"] = {},
     ["lua-language-server"] = {
         settings = {
             Lua = {

@@ -23,3 +23,11 @@ vim.opt.termguicolors = true
 vim.signcolumn = "yes"
 
 vim.opt.clipboard = "unnamedplus"
+
+-- 更改win默认终端
+if vim.fn.has('win32') == 1 then
+    vim.opt.shell = "powershell.exe"
+    vim.opt.shellcmdflag = "-NoLogo -ExecutionPolicy RemoteSigned -Command"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+end
