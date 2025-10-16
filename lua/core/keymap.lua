@@ -14,3 +14,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<leader>sv", "<C-w>v")
 vim.keymap.set("n", "<leader>sh", "<C-w>s")
+
+-- some plugins keymap
+
+vim.keymap.set('n', "<leader>fr", "<cmd>GrugFar<CR>")
