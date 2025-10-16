@@ -1,14 +1,36 @@
 return {
-    "nvimtools/none-ls.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    event = "VeryLazy",
-    config = function()
-        local null_ls = require("null-ls")
-        null_ls.setup({
-            sources = {
-                null_ls.builtins.formatting.stylua,
-            },
-        })
-    end,   
+
+	"nvimtools/none-ls.nvim",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	event = "VeryLazy",
+	config = function()
+		local registry = require("mason-registry")
+
+		local function install(name)
+			local success, package = pcall(registry.get_package, name)
+			if success and not package:is_installed() then
+				package:install()
+			end
+		end
+
+		install("stylua")
+
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.formatting.clang_format,
+				null_ls.builtins.formatting.stylua,
+				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.google_java_format,
+			},
+		})
+	end,
+	keys = {
+		{
+			"<leader>lf",
+			function()
+				vim.lsp.buf.format()
+			end,
+		},
+	},
 }
--- 未完成的插件（格式化）（有点麻烦）。。。

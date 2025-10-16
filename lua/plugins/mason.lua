@@ -26,6 +26,12 @@ local function setup(name, config)
     end
 
     local lsp = require("mason-lspconfig").get_mappings().package_to_lspconfig[name]
+
+    config.on_attach = function (client)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+    end
+    
     vim.lsp.config(lsp, config)
 end
 
