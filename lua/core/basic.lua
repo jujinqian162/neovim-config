@@ -7,6 +7,7 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 vim.opt.autoread = true
+vim.opt.showmode = false -- already has lualine so don't need this
 
 -- 如果查找的内容中不存在大写，则大小写不敏感
 vim.opt.ignorecase = true
