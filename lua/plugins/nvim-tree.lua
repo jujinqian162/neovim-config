@@ -7,6 +7,9 @@ return {
                 quit_on_open = true,
             },
         },
+        git = {
+            ignore = false,
+        },
     },
     keys = {
         { "<leader>tr", ":NvimTreeToggle<CR>" },
