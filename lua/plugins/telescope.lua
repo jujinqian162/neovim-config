@@ -20,10 +20,14 @@ return {
                 layout_config = {
                     vertical = { width = 0.5 }
                 },
+                file_ignore_patterns = {
+                    "%.git/",
+                }
             },
             pickers = {
                 find_files = {
-                    theme = "dropdown"
+                    theme = "dropdown",
+                    hidden = true,
                 },
                 live_grep = {
                     theme = "dropdown"

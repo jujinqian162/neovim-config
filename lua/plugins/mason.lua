@@ -9,6 +9,7 @@ local servers = {
             }
         }
     },
+    ["rust-analyzer"] = {},
     ["cmake-language-server"] = {},
     pyright = {},
     ["html-lsp"] = {},

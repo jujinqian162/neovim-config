@@ -2,7 +2,6 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', {})
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', {})
-vim.keymap.set('n', '<leader>wq', '<cmd>wqall<CR>', {})
 
 vim.keymap.set('i', 'jj', '<Esc>', {})
 
