@@ -4,7 +4,9 @@ vim.keymap.set('n', '<leader>w', '<cmd>w<CR>', {})
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', {})
 
 vim.keymap.set('i', 'jj', '<Esc>', {})
-
+-- 光标快速移动
+vim.keymap.set('n', '<leader>j', '20j')
+vim.keymap.set('n', '<leader>k', '20k')
 
 -- -----视觉模式---------
 -- 单行或多行移动 
