@@ -16,9 +16,6 @@ vim.opt.smartcase = true
 -- 不要在查找之后继续高亮匹配结果
 vim.opt.hlsearch = false
 
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
 -- 有啥用？
 vim.opt.termguicolors = true
 vim.signcolumn = "yes"
