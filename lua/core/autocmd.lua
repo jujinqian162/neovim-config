@@ -1,34 +1,11 @@
+local group = vim.api.nvim_create_augroup("UserFileRefresh", { clear = true })
 
-vim.api.nvim_create_autocmd("WinEnter", {
-    pattern = "*",
-    callback = function ()
-        vim.cmd("silent! wall")
-        -- vim.cmd("LspStart")
-        pcall(vim.cmd, "LspStart")
-        -- print("WinEnter")
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+    group = group,
+    callback = function(event)
+        if vim.bo[event.buf].buftype == "" and not vim.bo[event.buf].modified then
+            vim.cmd("checktime " .. event.buf)
+        end
     end,
 })
-
-vim.api.nvim_create_autocmd("WinLeave", {
-    pattern = "*",
-    callback = function ()
-        vim.cmd("silent! wall") 
-        pcall(vim.cmd, "LspStart") 
-    end,
-})
-
-vim.api.nvim_create_autocmd("BufLeave", {
-    pattern = "*",
-    callback = function ()
-        vim.cmd("silent! wall")
-        pcall(vim.cmd, "LspStart")
-    end,
-})
-vim.api.nvim_create_autocmd("BufNewFile", {
-    pattern = "*",
-    callback = function ()
-        pcall(vim.cmd, "LspStart") 
-    end,
-})
-
 

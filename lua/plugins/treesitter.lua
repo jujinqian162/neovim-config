@@ -1,20 +1,22 @@
+local languages = {
+    "lua", "vim", "python", "cpp", "c", "java",
+    "markdown", "markdown_inline", "typst", "cmake", "html", "yaml",
+}
+
 return {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    branch = "main",
+    lazy = false,
+    build = function()
+        require("nvim-treesitter").install(languages, { force = true }):wait(180000)
+    end,
     config = function()
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = { "lua", "vim", "python", "cpp", "c", "java" },
-            jkhighlight = { enable = true },
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("UserTreesitterHighlight", { clear = true }),
+            pattern = { "lua", "vim", "python", "cpp", "c", "java", "markdown", "typst", "cmake", "html", "yaml" },
+            callback = function(event)
+                vim.treesitter.start(event.buf)
+            end,
         })
     end,
 }
--- return {
---     "nvim-treesitter/nvim-treesitter",
---     main = "nvim-treesitter.configs",
---     branch = "master", -- 详见本系列的附录
---     event = "VeryLazy",
---     opts = {
---         ensure_installed = { "lua", "pyright" },
---         highlight = { enable = true }
---     },
--- }

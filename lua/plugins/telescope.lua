@@ -1,19 +1,12 @@
 return {
 
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
+    tag = 'v0.2.1',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        -- {
-        --     "nvim-telescope/telescope-fzf-native.nvim",
-        --     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && "
-        --         .. "cmake --build build --config Release && "
-        --         .. "cmake --install build --prefix build",
-        -- }
     },
     config = function ()
         local telescope = require("telescope")
-        -- telescope.load_extension("fzf")
         local builtin  = require("telescope.builtin")
         telescope.setup({
             defaults = {
@@ -33,18 +26,10 @@ return {
                     theme = "dropdown"
                 }
             },
-            extension = {
-                fzf = {
-                    fuzzy = true,
-                    override_generic_sorter = true,
-                    override_file_sorter = true,
-                    case_mode = "smart_case",
-                },
-            }
         })
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find files'})
-        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Live grep'})
-        vim.keymap.set('n', '<leader>fd', builtin.current_buffer_fuzzy_find, { desc = 'find in file'})
-        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Find buffers'})
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '按文件名查找' })
+        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '搜索项目里的内容' })
+        vim.keymap.set('n', '<leader>fd', builtin.current_buffer_fuzzy_find, { desc = '搜索当前文件' })
+        vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = '选择已打开的文件' })
     end
 }

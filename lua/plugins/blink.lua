@@ -35,7 +35,7 @@ local _opts = {
 
 return {
     "saghen/blink.cmp",
-    version = "*",
+    version = "^1.0.0",
     dependencies = {
         "rafamadriz/friendly-snippets",
     },

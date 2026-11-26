@@ -4,17 +4,6 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim" },
 	event = "VeryLazy",
 	config = function()
-		local registry = require("mason-registry")
-
-		local function install(name)
-			local success, package = pcall(registry.get_package, name)
-			if success and not package:is_installed() then
-				package:install()
-			end
-		end
-
-		install("stylua")
-
 		local null_ls = require("null-ls")
 		null_ls.setup({
 			sources = {
@@ -28,8 +17,9 @@ return {
 		{
 			"<leader>lf",
 			function()
-				vim.lsp.buf.format()
+				vim.lsp.buf.format({ timeout_ms = 3000 })
 			end,
+			desc = "格式化当前文件",
 		},
 	},
 }

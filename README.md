@@ -1,7 +1,32 @@
 # Neovim 配置
 
-- Neovim: `NVIM v0.12.0-dev`
-- 依赖: `node.js >= 20`（`apt install` 版本可能过低，可使用 `nvm` 管理）
+- Neovim: 使用 `v0.12.6` 稳定版验证；可从 [Neovim Releases](https://github.com/neovim/neovim/releases) 获取。
+- Tree-sitter 使用 `nvim-treesitter` 的 `main` 分支。安装或更新解析器需要 `tree-sitter` CLI `0.26.1+`、C 编译器、`curl` 和 `tar`。
+- 搜索依赖 `ripgrep`（`rg`）；运行 Pyright 等语言服务器需要 Node.js（本配置建议 20+，可用 `nvm` 管理）。
+
+## 重新上手
+
+1. 在项目目录输入 `nvim .`。在普通模式下，按一次**空格**，稍等就能看到快捷键菜单；也可输入 `:WhichKey <leader>`。
+2. `空格 f f` 按文件名找文件；`空格 f g` 搜索当前工作目录下的文件内容。输入关键词，再按回车打开结果。`空格 t r` 则打开左侧文件树。
+3. `i` 开始输入；`Esc` 或 `jj` 回到普通模式；`u` 撤销，`Ctrl-r` 重做，`/关键词` 搜索当前文件，`n` 跳到下一处。
+4. **切换文件不再自动保存。** 用 `空格 w` 或 `:w` 保存；`空格 q` 或 `:q` 关闭窗口；`:wq` 保存并关闭。
+5. 写代码时，`空格 l d` 跳到定义（`Ctrl-o` 跳回），`空格 l h` 查看函数说明。补全可用 `Ctrl-Space` 主动打开，用 `Tab` 接受候选。
+
+## Jupyter Notebook
+
+用 `nvim 文件.ipynb` 直接打开，Jupynvim 显示单元格而不是 JSON。普通 `.py` 文件不受影响。
+
+| 操作 | 按键或命令 |
+| --- | --- |
+| 上下选择单元格 | `k` / `j` |
+| 进入单元格编辑、返回单元格浏览 | `Enter` / `Esc` |
+| 运行当前单元格并前进 | `空格 n r` |
+| 只运行当前单元格，留在原地 | `:JupynvimRunCell` |
+| 下方插入单元格 | `空格 n b` |
+| 选择 Python 内核 | `空格 n K`，大写 `K` |
+| 保存原 `.ipynb` | `:w` |
+
+运行前等状态提示 `kernel started`。有合适的项目 `.venv` 时，Jupynvim 可以自动选它；如果选错，用 `空格 n K` 切换。网页终端里的图表显示取决于终端支持。
 
 ## 快捷键
 
@@ -18,8 +43,8 @@
 | Normal | `<leader>w` | 保存 (`:w`) | `lua/core/keymap.lua` |
 | Normal | `<leader>q` | 退出 (`:q`) | `lua/core/keymap.lua` |
 | Insert | `jj` | 退出插入模式 | `lua/core/keymap.lua` |
-| Normal | `<leader>j` | 向下快速移动 20 行 | `lua/core/keymap.lua` |
-| Normal | `<leader>k` | 向上快速移动 20 行 | `lua/core/keymap.lua` |
+| Normal | `J` | 向下快速移动 15 行 | `lua/core/keymap.lua` |
+| Normal | `K` | 向上快速移动 15 行 | `lua/core/keymap.lua` |
 | Visual | `J` | 选区下移一行（保持选区） | `lua/core/keymap.lua` |
 | Visual | `K` | 选区上移一行（保持选区） | `lua/core/keymap.lua` |
 | Normal | `<leader>sv` | 垂直分屏 (`<C-w>v`) | `lua/core/keymap.lua` |
@@ -52,6 +77,7 @@
 | --- | --- | --- | --- |
 | Normal | `<leader>tt` | 切换浮动终端 (`:ToggleTerm`) | `lua/plugins/toggleterm.lua` |
 | Normal | `<leader>th` | 打开/切换水平终端 | `lua/plugins/toggleterm.lua` |
+| Terminal | `Esc` `Esc` | 回到普通模式，再用同一个快捷键收起终端 | `lua/plugins/toggleterm.lua` |
 
 ### Buffer（bufferline）
 
@@ -97,6 +123,9 @@
 | Normal | `<C-k>` | 切换到上侧 tmux/neovim 窗口 | `lua/plugins/tmux-navigator.lua` |
 | Normal | `<C-l>` | 切换到右侧 tmux/neovim 窗口 | `lua/plugins/tmux-navigator.lua` |
 
-## 备注
+## 维护
 
-- `lua/core/autocmd.lua` 里在多个事件里会 `silent! wall` 自动保存，并尝试 `LspStart`。
+- `:Lazy`：查看插件版本、状态和更新；`:Lazy restore` 按 `lazy-lock.json` 恢复锁定的插件版本。
+- `:TSUpdate`：更新 Tree-sitter 解析器；`:checkhealth nvim-treesitter` 检查解析器和 CLI。
+- `:Mason`：查看语言服务器和格式化工具，按需安装。已安装的语言服务器会按文件类型自动启用；例如新机器可以用 `:MasonInstall pyright lua-language-server`。
+- `:checkhealth vim.lsp`：检查当前语言服务器。`空格 l f` 格式化需要对应工具，可用 `:MasonInstall stylua black clang-format` 安装。

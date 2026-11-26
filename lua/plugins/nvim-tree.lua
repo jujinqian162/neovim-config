@@ -12,7 +12,7 @@ return {
         },
     },
     keys = {
-        { "<leader>tr", ":NvimTreeToggle<CR>" },
+        { "<leader>tr", "<cmd>NvimTreeToggle<CR>", desc = "打开或关闭文件树" },
     },
 }
 
